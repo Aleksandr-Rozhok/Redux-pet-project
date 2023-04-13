@@ -1,3 +1,23 @@
+export const fetchHeroes = (request) => (dispatch) => {
+    dispatch(heroesFetching());
+    request("http://localhost:3001/heroes")
+        .then(data => dispatch(heroesFetched(data)))
+        .catch(() => dispatch(heroesFetchingError()))
+}
+
+export const deleteChar = (request, id) => async (dispatch) => {
+    dispatch(heroesFetching());
+    await request(`http://localhost:3001/heroes/${id}`, "DELETE");
+    dispatch(fetchHeroes(request))
+}
+
+export const fetchOptions = (request) => (dispatch) => {
+    dispatch(heroesFetching());
+    request("http://localhost:3001/filters")
+        .then(data => dispatch(optionsFetched(data)))
+        .catch(() => dispatch(heroesFetchingError()))
+}
+
 export const heroesFetching = () => {
     return {
         type: 'HEROES_FETCHING'

@@ -62,9 +62,7 @@ const HeroesAddForm = () => {
                         type="text" 
                         name="name" 
                         className="form-control" 
-                        placeholder="Как меня зовут?"
-                        onChange={(e) => dispatch(setInputNameValue(e.target.value))}
-                        value={inputNameValue}/>
+                        placeholder="Как меня зовут?"/>
                     <ErrorMessage style={{color: "#e53e3e", marginTop: "8px"}} name="name" component="div"/>
                 </div>
 
@@ -75,8 +73,6 @@ const HeroesAddForm = () => {
                         as="textarea" 
                         className="form-control" 
                         placeholder="Что я умею?"
-                        value={inputDescValue}
-                        onChange={(e) => dispatch(setInputDescValue(e.target.value))}
                         style={{"height": '130px'}}/>
                     <ErrorMessage style={{color: "#e53e3e", marginTop: "8px"}} name="description" component="div"/>
                 </div>
