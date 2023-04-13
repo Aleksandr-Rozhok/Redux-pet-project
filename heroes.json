@@ -14,9 +14,21 @@
     },
     {
       "name": "asdasd",
-      "description": "adawdawd",
+      "description": "asdasda",
+      "element": "water",
+      "id": "f1c2a0ee-7969-429b-88ae-9d2909ee61a7"
+    },
+    {
+      "name": "Thor",
+      "description": "zczxcv",
       "element": "fire",
-      "id": "a1b5fcd1-ad13-42c4-8d9b-600711ea2c40"
+      "id": "74bf887a-f3e5-4de8-ba19-a3a2e99779ea"
+    },
+    {
+      "name": "asdasd121212",
+      "description": "121212",
+      "element": "earth",
+      "id": "e7dca588-4970-4cac-9c5f-678b7a109c2a"
     }
   ],
   "filters": [

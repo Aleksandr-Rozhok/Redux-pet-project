@@ -1,23 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {useHttp} from '../../hooks/http.hook';
-import { heroesFetching, heroesFetched, heroesFetchingError, setInputNameValue, setInputDescValue } from '../../actions';
+import { addChar } from '../../actions';
 
 const HeroesAddForm = () => {
     const {request} = useHttp();
     const filters = useSelector(state => state.filters.filters);
-    const {inputNameValue, inputDescValue} = useSelector(state => state.inputs);
     const dispatch = useDispatch();
-
-    const loadData = async () => {
-        dispatch(heroesFetching());
-        await request("http://localhost:3001/heroes")
-            .then(data => dispatch(heroesFetched(data)))
-            .catch(() => dispatch(heroesFetchingError()))
-    }
 
     const renderOptionsList = (arr) => {
         return arr.map((item, i) => {
@@ -44,9 +36,7 @@ const HeroesAddForm = () => {
                     .required("Обязательное поле!"),
         })}
         onSubmit = {async (values, actions) => {
-            dispatch(heroesFetching());
-            await request('http://localhost:3001/heroes', "POST", JSON.stringify(values, null, 2))
-            await loadData();
+            await dispatch(addChar(request, JSON.stringify(values, null, 2)))
             actions.resetForm({
                 values: {
                     name: '',

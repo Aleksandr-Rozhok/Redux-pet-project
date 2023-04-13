@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { filterCharacters } from '../../actions';
+import { filterCharacters } from '../heroesFilters/filtersSlice';
 
 const HeroesFilters = () => {
     const activeClass = useSelector(state => state.filters.activeClass);

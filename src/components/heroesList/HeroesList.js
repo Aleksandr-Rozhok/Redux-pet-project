@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { fetchHeroes, fetchOptions, deleteChar } from '../../actions';
+import { filtersFetched } from '../heroesFilters/filtersSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
