@@ -3,8 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import { useSelector, useDispatch } from 'react-redux';
 
-import {useHttp} from '../../hooks/http.hook';
-import { addChar } from '../../actions';
+import { useHttp } from '../../hooks/http.hook';
+import { heroPost } from '../heroesList/heroesSlice';
 
 const HeroesAddForm = () => {
     const {request} = useHttp();
@@ -36,7 +36,7 @@ const HeroesAddForm = () => {
                     .required("Обязательное поле!"),
         })}
         onSubmit = {async (values, actions) => {
-            await dispatch(addChar(request, JSON.stringify(values, null, 2)))
+            dispatch(heroPost(values))
             actions.resetForm({
                 values: {
                     name: '',

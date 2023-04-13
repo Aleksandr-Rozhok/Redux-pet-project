@@ -1,10 +1,9 @@
-import {useHttp} from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
+import { createSelector } from '@reduxjs/toolkit';
 
-import { fetchHeroes, fetchOptions, deleteChar } from '../../actions';
-import { filtersFetched } from '../heroesFilters/filtersSlice';
+import { fetchHeroes, heroDelete } from '../heroesList/heroesSlice';
+import { fetchFilters } from '../heroesFilters/filtersSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
 
@@ -25,17 +24,13 @@ const HeroesList = () => {
     const filteredHeroes = useSelector(filteredHeroesSelector);
     const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
     const dispatch = useDispatch();
-    const {request} = useHttp();
 
     useEffect(() => {
-        dispatch(fetchHeroes(request))
-        dispatch(fetchOptions(request))
+        dispatch(fetchHeroes())
+        dispatch(fetchFilters())
         // eslint-disable-next-line
     }, []);
 
-    const deleteCharacter = (id) => {
-        dispatch(deleteChar(request, id))
-    }
 
     if (heroesLoadingStatus === "loading") {
         return <Spinner/>;
@@ -49,7 +44,7 @@ const HeroesList = () => {
         }
 
         return arr.map(({id, ...props}) => {
-            return <HeroesListItem key={id} deleteChar={() => deleteCharacter(id)} {...props}/>
+            return <HeroesListItem key={id} deleteChar={() => dispatch(heroDelete(id))} {...props}/>
         })
     }
 
