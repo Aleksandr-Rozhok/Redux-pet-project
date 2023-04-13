@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,8 @@ import { heroesFetching, heroesFetched, heroesFetchingError, setInputNameValue, 
 
 const HeroesAddForm = () => {
     const {request} = useHttp();
-    const {filters, inputNameValue, inputDescValue} = useSelector(state => state);
+    const filters = useSelector(state => state.filters.filters);
+    const {inputNameValue, inputDescValue} = useSelector(state => state.inputs);
     const dispatch = useDispatch();
 
     const loadData = async () => {
@@ -19,8 +20,8 @@ const HeroesAddForm = () => {
     }
 
     const renderOptionsList = (arr) => {
-        return arr.map((item) => {
-            return <option value={item.filter}>{item.title}</option>
+        return arr.map((item, i) => {
+            return <option key={i} value={item.filter}>{item.title}</option>
         })
     }
 
@@ -34,11 +35,11 @@ const HeroesAddForm = () => {
         }}
         validationSchema = {Yup.object({
             name: Yup.string()
-                    .min(2, "Минимум 2 символа!")
-                    .required("Обязательное поле!"),
+                    .required("Обязательное поле!")
+                    .min(2, "Минимум 2 символа!"),
             description: Yup.string()
-                    .min(5, "Минимум 5 символов!")
-                    .required("Обязательное поле!"),
+                    .required("Обязательное поле!")
+                    .min(5, "Минимум 5 символов!"),
             element: Yup.string()
                     .required("Обязательное поле!"),
         })}
@@ -62,8 +63,8 @@ const HeroesAddForm = () => {
                         name="name" 
                         className="form-control" 
                         placeholder="Как меня зовут?"
-                        value={inputNameValue}
-                        onChange={(e) => dispatch(setInputNameValue(e.target.value))}/>
+                        onChange={(e) => dispatch(setInputNameValue(e.target.value))}
+                        value={inputNameValue}/>
                     <ErrorMessage style={{color: "#e53e3e", marginTop: "8px"}} name="name" component="div"/>
                 </div>
 

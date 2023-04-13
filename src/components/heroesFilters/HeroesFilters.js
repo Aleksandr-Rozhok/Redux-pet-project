@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { filterCharacters, heroesFetched } from '../../actions';
+import { filterCharacters } from '../../actions';
 
 const HeroesFilters = () => {
-    const {heroes, activeClass} = useSelector(state => state);
+    const activeClass = useSelector(state => state.filters.activeClass);
     const dispatch = useDispatch();
 
     return (
@@ -14,7 +14,7 @@ const HeroesFilters = () => {
                 <div className="btn-group">
                     <button 
                         value="all"
-                        onClick={() => dispatch(heroesFetched(heroes))} 
+                        onClick={(e) => dispatch(filterCharacters(e.currentTarget.value))} 
                         className={classNames('btn', 'btn-outline-dark', {'active': activeClass === 'all' })}>
                             Все
                         </button>
