@@ -1,0 +1,62 @@
+{
+  "heroes": [
+    {
+      "name": "Thor",
+      "description": "11111",
+      "element": "wind",
+      "id": "562b2b1d-320c-4d45-9b85-df32d6153c03"
+    },
+    {
+      "name": "aasda",
+      "description": "asdasda",
+      "element": "wind",
+      "id": "cy5MbDY"
+    },
+    {
+      "name": "sdsdsd",
+      "description": "123123123",
+      "element": "fire",
+      "id": "0ae5524b-b2ee-459e-bff0-a13eeb063a9c"
+    },
+    {
+      "name": "asdasd",
+      "description": "asdasdasda",
+      "element": "water",
+      "id": "u62WPG9"
+    },
+    {
+      "name": "asd",
+      "description": "111111",
+      "element": "earth",
+      "id": "kVm8mNB"
+    },
+    {
+      "name": "Arsenii",
+      "description": "11111111111",
+      "element": "fire",
+      "id": "ea7b210d-7bf9-49e8-86b0-42d1dfbca3fc"
+    }
+  ],
+  "filters": [
+    {
+      "filter": "all",
+      "title": "Я владею элементом..."
+    },
+    {
+      "filter": "fire",
+      "title": "Огонь"
+    },
+    {
+      "filter": "water",
+      "title": "Вода"
+    },
+    {
+      "filter": "wind",
+      "title": "Ветер"
+    },
+    {
+      "filter": "earth",
+      "title": "Земля"
+    }
+  ]
+}
