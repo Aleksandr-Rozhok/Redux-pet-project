@@ -33,22 +33,32 @@
   ],
   "filters": [
     {
+      "id": "all",
+      "name": "all",
       "filter": "all",
       "title": "Я владею элементом..."
     },
     {
+      "id": "fire",
+      "name": "fire",
       "filter": "fire",
       "title": "Огонь"
     },
     {
+      "id": "water",
+      "name": "water",
       "filter": "water",
       "title": "Вода"
     },
     {
+      "id": "wind",
+      "name": "wind",
       "filter": "wind",
       "title": "Ветер"
     },
     {
+      "id": "earth",
+      "name": "earth",
       "filter": "earth",
       "title": "Земля"
     }

@@ -1,20 +1,24 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import store from "../../store/index"
 
 import { useHttp } from '../../hooks/http.hook';
-import { heroPost } from '../heroesList/heroesSlice';
+import { heroPost, } from '../heroesList/heroesSlice';
+import { selectAll } from '../heroesFilters/filtersSlice';
 
 const HeroesAddForm = () => {
     const {request} = useHttp();
-    const filters = useSelector(state => state.filters.filters);
+    const filters = selectAll(store.getState());
     const dispatch = useDispatch();
 
     const renderOptionsList = (arr) => {
-        return arr.map((item, i) => {
-            return <option key={i} value={item.filter}>{item.title}</option>
-        })
+        if (filters && filters.length > 0 ) {
+            return arr.map((item, i) => {
+                return <option key={i} value={item.filter}>{item.title}</option>
+            })
+        }
     }
 
     const options = renderOptionsList(filters);
@@ -37,6 +41,7 @@ const HeroesAddForm = () => {
         })}
         onSubmit = {async (values, actions) => {
             dispatch(heroPost(values))
+            request('http://localhost:3001/heroes', "POST", JSON.stringify(values));
             actions.resetForm({
                 values: {
                     name: '',
