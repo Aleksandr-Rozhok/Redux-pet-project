@@ -1,17 +1,15 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from "yup";
-import { useDispatch } from 'react-redux';
-import store from "../../store/index"
 
-import { useHttp } from '../../hooks/http.hook';
-import { heroPost, } from '../heroesList/heroesSlice';
-import { selectAll } from '../heroesFilters/filtersSlice';
+import { useCreateHeroMutation, useGetOptionsQuery } from '../../api/apiSlice';
 
 const HeroesAddForm = () => {
-    const {request} = useHttp();
-    const filters = selectAll(store.getState());
-    const dispatch = useDispatch();
+    const [createHero, {isLoading}] = useCreateHeroMutation();
+
+    const {
+        data: filters = []
+    } = useGetOptionsQuery();
 
     const renderOptionsList = (arr) => {
         if (filters && filters.length > 0 ) {
@@ -40,8 +38,7 @@ const HeroesAddForm = () => {
                     .required("Обязательное поле!"),
         })}
         onSubmit = {async (values, actions) => {
-            dispatch(heroPost(values))
-            request('http://localhost:3001/heroes', "POST", JSON.stringify(values));
+            createHero(values).unwrap();
             actions.resetForm({
                 values: {
                     name: '',
